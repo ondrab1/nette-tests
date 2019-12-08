@@ -6,6 +6,7 @@ use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\Http\Session;
 use PHPUnit\Framework\TestCase;
+use Wavevision\NetteTests\Setup\AllowInjects;
 use Wavevision\NetteTests\Setup\ConfigureContainer;
 
 trait SetupContainer
@@ -26,6 +27,9 @@ trait SetupContainer
             if (!$session->isStarted()) {
                 $session->start();
             }
+        } else {
+            $setupInjects = static::$container->getByType(AllowInjects::class);
+            $setupInjects->process(static::$container, $testCase);
         }
 	}
 
