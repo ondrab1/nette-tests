@@ -14,7 +14,7 @@ trait SetupContainer
 	/**
 	 * @var Container
 	 */
-	private static $container;
+	protected static $container;
 
 	protected function setupContainer(Configurator $configurator, TestCase $testCase): void
 	{
