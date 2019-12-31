@@ -2,7 +2,7 @@
 
 namespace Wavevision\NetteTests\TestCases;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\DbUnit\TestCase;
 use Wavevision\NetteTests\Configuration;
 use Wavevision\NetteTests\TestCases\Parts\SetupContainer;
 
