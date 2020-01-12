@@ -2,6 +2,7 @@
 
 namespace Wavevision\NetteTests\TestCases;
 
+use PHPUnit\DbUnit\Operation\Factory;
 use PHPUnit\DbUnit\TestCase;
 use Wavevision\NetteTests\Configuration;
 use Wavevision\NetteTests\TestCases\Parts\SetupContainer;
@@ -17,8 +18,6 @@ abstract class DIContainerTestCase extends TestCase
 	{
 		parent::setUp();
 		$this->setupContainer(Configuration::createConfigurator(), $this);
-
-		$this->getConnection()->getConnection()->beginTransaction();
 	}
 
 	protected function getConnection()
@@ -39,11 +38,9 @@ abstract class DIContainerTestCase extends TestCase
         return $this->connection;
     }
 
-    protected function tearDown(): void
+    protected function getTearDownOperation()
     {
-        parent::tearDown();
-
-        $this->getConnection()->getConnection()->rollBack();
+        return Factory::DELETE_ALL();
     }
 
     protected function getDataSet()
