@@ -17,6 +17,8 @@ abstract class DIContainerTestCase extends TestCase
 	{
 		parent::setUp();
 		$this->setupContainer(Configuration::createConfigurator(), $this);
+
+		$this->getConnection()->getConnection()->beginTransaction();
 	}
 
 	protected function getConnection()
@@ -35,6 +37,13 @@ abstract class DIContainerTestCase extends TestCase
 
 
         return $this->connection;
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->getConnection()->getConnection()->rollBack();
     }
 
     protected function getDataSet()
