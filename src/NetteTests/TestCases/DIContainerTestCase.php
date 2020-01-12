@@ -38,9 +38,12 @@ abstract class DIContainerTestCase extends TestCase
         return $this->connection;
     }
 
-    protected function getTearDownOperation()
+    protected function getSetUpOperation()
     {
-        return Factory::DELETE_ALL();
+        return new \PHPUnit\DbUnit\Operation\Composite([
+            new \PHPUnit\DbUnit\Operation\DeleteAll(),
+            new \PHPUnit\DbUnit\Operation\Insert(),
+        ]);
     }
 
     protected function getDataSet()
